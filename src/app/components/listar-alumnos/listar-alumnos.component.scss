@@ -1,0 +1,22 @@
+.alumnosContainer{
+    width: 100%;
+}
+
+.listadoContainer{
+    margin-top: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.actions{
+    margin-left: .5rem;
+    padding: .2rem .3rem;
+}
+
+.actionsBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

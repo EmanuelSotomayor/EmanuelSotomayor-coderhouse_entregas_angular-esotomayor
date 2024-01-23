@@ -1,0 +1,16 @@
+<nav [ngClass]="'navbar'">
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon fontIcon="menu"></mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <a href="#inicio">Inicio</a>
+        </button>
+        <button mat-menu-item>
+          <a href="#formAlumnos">Agregar alumno</a>
+        </button>
+        <button mat-menu-item>
+          <a href="#listadoAlumnos">Listar alumno</a>
+        </button>
+      </mat-menu>
+</nav>
