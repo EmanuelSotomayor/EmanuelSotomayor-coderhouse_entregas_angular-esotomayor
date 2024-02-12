@@ -1,0 +1,14 @@
+.formAlumno{
+    width: 90%;
+    max-width: 400px;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    padding: .5rem;
+}
+
+.campoRequerido{
+    color: #f02c2c;
+    margin-bottom: 1rem;
+}

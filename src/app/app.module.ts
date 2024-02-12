@@ -19,6 +19,10 @@ import { LayoutComponent } from './layout/layout/layout.component';
 import { MatTableModule } from '@angular/material/table';
 import { NombreCompletoPipe } from './pipes/nombre-completo.pipe';
 import { AgrandarTitulosDirective } from './directives/agrandar-titulos.directive';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { FormEditarAlumnoComponent } from './components/form-editar-alumno/form-editar-alumno.component';
+import { IniciarSesionComponent } from './components/iniciar-sesion/iniciar-sesion.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +34,10 @@ import { AgrandarTitulosDirective } from './directives/agrandar-titulos.directiv
     ToolbarComponent,
     LayoutComponent,
     NombreCompletoPipe,
-    AgrandarTitulosDirective
+    AgrandarTitulosDirective,
+    FormEditarAlumnoComponent,
+    IniciarSesionComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +50,8 @@ import { AgrandarTitulosDirective } from './directives/agrandar-titulos.directiv
     MatIconModule,
     MatToolbarModule,
     MatMenuModule,
-    MatTableModule
+    MatTableModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

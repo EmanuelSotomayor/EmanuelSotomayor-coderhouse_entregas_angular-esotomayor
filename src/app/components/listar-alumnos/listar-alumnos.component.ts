@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import AlumnoModel from '../../models/alumno.model';
 import { AlumnoService } from '../../services/alumno.service';
+import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: 'app-listar-alumnos',
@@ -9,32 +10,37 @@ import { AlumnoService } from '../../services/alumno.service';
 })
 export class ListarAlumnosComponent implements OnInit{
 
-  alumnoCargados: AlumnoModel[] = this.alumnoService.listarAlumnos();
-  cargando: boolean = true;
+  alumnoCargados: AlumnoModel[] = [];
+  cargando: boolean = false;
   alumnoSeleccionado: AlumnoModel | null = null;
   titulo: string = "Listado de alumnos";
   filasVisualizadas: string[] = ['id', 'nombre', 'apellido', 'edad', 'telefono', 'nombreCompleto', 'acciones'];
 
-  constructor(private alumnoService: AlumnoService){
-    setTimeout(() => {
-      this.cargando = false
-      console.log(this.cargando)
-    }, 2000);
-  }
+  constructor(private alumnoService: AlumnoService, private loadingService: LoadingService){}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+    this.loadingService.isLoading$.subscribe({
+      next: (loading) => this.cargando = loading
+    });
+
+    this.loadingService.setLoadingStatus(true);
+    
+    this.alumnoService.listarAlumnos().subscribe({
+      next: (alumnos) => {
+        this.alumnoCargados = alumnos;
+      },
+      complete: () => {
+        this.loadingService.setLoadingStatus(false);
+      }
+    });
+
+  }
 
   onPressEliminarAlumno(id: any): void{
-    this.alumnoService.eliminarAlumno(id);
-    this.actualizarAlumnos();
-  }
-
-  onPressModificarAlumno(alumno: AlumnoModel): void{
-    this.alumnoSeleccionado = alumno;
-  }
-
-  actualizarAlumnos(){
-    this.alumnoCargados = [...this.alumnoService.listarAlumnos()];
+    this.alumnoService.eliminarAlumno(id).subscribe({
+      next: (alumnos) => this.alumnoCargados = alumnos
+    });
   }
 
 } 

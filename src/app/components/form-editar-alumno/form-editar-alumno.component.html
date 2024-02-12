@@ -1,0 +1,47 @@
+<form [formGroup]="formAlumno" [ngClass]="'formAlumno'" id="formAlumno" (ngSubmit)="modificarAlumno()" action="">
+    
+    <p appAgrandarTitulos>{{titulo}}</p>
+
+    <mat-form-field appearance="fill" [hidden]="true">
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="id"/>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombre"/>
+    </mat-form-field>
+    <span [ngClass]="'campoRequerido'" *ngIf="this.formAlumno.get('nombre')?.hasError('required') 
+    && this.formAlumno.get('nombre')?.touched">Campo requerido ...</span>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Apellido</mat-label>
+        <input matInput formControlName="apellido"/>
+    </mat-form-field>
+    <span [ngClass]="'campoRequerido'" *ngIf="this.formAlumno.get('apellido')?.hasError('required') 
+    && this.formAlumno.get('apellido')?.touched">Campo requerido ...</span>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Edad</mat-label>
+        <input matInput formControlName="edad"/>
+    </mat-form-field>
+    <span [ngClass]="'campoRequerido'" *ngIf="this.formAlumno.get('edad')?.hasError('required') 
+    && this.formAlumno.get('edad')?.touched">Campo requerido ...</span>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Pais</mat-label>
+        <input matInput formControlName="pais"/>
+    </mat-form-field>
+    <span [ngClass]="'campoRequerido'" *ngIf="this.formAlumno.get('pais')?.hasError('required') 
+    && this.formAlumno.get('pais')?.touched">Campo requerido ...</span>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Telefono</mat-label>
+        <input matInput formControlName="telefono"/>
+    </mat-form-field>
+    <span [ngClass]="'campoRequerido'" *ngIf="this.formAlumno.get('telefono')?.hasError('required') 
+    && this.formAlumno.get('telefono')?.touched">Campo requerido ...</span>
+
+<button mat-raised-button type="submit" color="primary" [disabled]="formAlumno.invalid">Editar alumno</button>
+
+</form>

@@ -1,0 +1,19 @@
+<form [formGroup]="formLogin" [ngClass]="'formLogin'" id="formLogin" (ngSubmit)="iniciarSesion()" action="">
+
+    <mat-form-field appearance="fill">
+        <mat-label>Correo</mat-label>
+        <input matInput formControlName="correo"/>
+    </mat-form-field>
+    <span [ngClass]="'campoRequerido'" *ngIf="this.formLogin.get('correo')?.hasError('required') 
+    && this.formLogin.get('correo')?.touched">Campo requerido ...</span>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Contraseña</mat-label>
+        <input matInput formControlName="clave"/>
+    </mat-form-field>
+    <span [ngClass]="'campoRequerido'" *ngIf="this.formLogin.get('clave')?.hasError('required') 
+    && this.formLogin.get('clave')?.touched">Campo requerido ...</span>
+
+<button mat-raised-button type="submit" color="primary" [disabled]="formLogin.invalid">Iniciar sesión</button>
+
+</form>

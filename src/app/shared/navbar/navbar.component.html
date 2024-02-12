@@ -4,13 +4,13 @@
       </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item>
-          <a href="#inicio">Inicio</a>
+          <a [routerLink]="['/alumnos']">Inicio</a>
         </button>
         <button mat-menu-item>
-          <a href="#formAlumnos">Agregar alumno</a>
+          <a [routerLink]="['/alumnos/agregar']">Agregar alumno</a>
         </button>
         <button mat-menu-item>
-          <a href="#listadoAlumnos">Listar alumno</a>
+          <a [routerLink]="['/alumnos']">Listar alumno</a>
         </button>
       </mat-menu>
 </nav>

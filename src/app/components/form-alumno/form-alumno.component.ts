@@ -1,22 +1,23 @@
-import { Component, EventEmitter, Input, Output, OnChanges, SimpleChanges } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AlumnoService } from '../../services/alumno.service';
+import { Router } from '@angular/router';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-form-alumno',
   templateUrl: './form-alumno.component.html',
   styleUrl: './form-alumno.component.scss'
 })
-export class FormAlumnoComponent implements OnChanges{
+export class FormAlumnoComponent{
 
   formAlumnos: FormGroup;
-  @Output()
-  alumnos = new EventEmitter();
-  @Input()
-  alumnoEditable: any;
   titulo: string = "Agregar alumno";
 
-  constructor(private alumnoService: AlumnoService, private formBuilder: FormBuilder){
+  constructor(private alumnoService: AlumnoService, 
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private notificationService: NotificationService){
 
     this.formAlumnos = this.formBuilder.group({
       id: new FormControl(null),
@@ -29,25 +30,23 @@ export class FormAlumnoComponent implements OnChanges{
 
   }
 
-  agregarActualizarAlumno(): void{
-    console.info(`ID seleccionado desde el form ${this.formAlumnos}`);
-    if(!this.formAlumnos.value.id){
-      this.alumnoService.agregarAlumno(this.formAlumnos.value);
-    }else{
-      this.alumnoService.modificarAlumno(this.formAlumnos.value);
-    }
-
-    this.alumnos.emit();
+  agregarAlumno(): void{
+    
+    this.alumnoService.agregarAlumno(this.formAlumnos.value).subscribe({
+      next: () => {
+        this.notificationService.showCustomAlert({
+          title: 'Creación de alumno',
+          text: `Se agregó un alumno`,
+          icon: 'success'
+        });
+      },
+      complete: () => {
+        this.router.navigate(['/alumnos'])
+      }
+    });
+    
     this.formAlumnos.reset();
 
-  }
-
-  ngOnChanges(): void {
-    if(this.alumnoEditable){
-      this.formAlumnos.setValue(this.alumnoEditable);
-      console.info(`Alumno seleccionado ${this.formAlumnos.get('id')?.value}`);
-    }
-    console.info(this.alumnos)
   }
 
 }

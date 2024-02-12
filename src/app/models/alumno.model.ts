@@ -4,5 +4,7 @@ export default interface AlumnoModel{
     apellido?: string,
     edad?: number,
     pais?: string,
-    telefono?: string
+    telefono?: string,
+    correo?: string,
+    clave?: string
 }
